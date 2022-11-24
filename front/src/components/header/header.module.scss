@@ -1,0 +1,24 @@
+.header {
+  margin-top: 15px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-end;
+
+
+  > button {
+    width: 85px;
+    border-radius: 15px;
+    border: none;
+    background-color: blueviolet;
+    cursor: pointer;
+    margin-right: 25px;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    color: #fff;
+  }
+
+  button:first-child {
+    margin-right: 10px;
+  }
+}

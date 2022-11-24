@@ -1,0 +1,28 @@
+.createTodo {
+  display: flex;
+  justify-content: center;
+  max-height: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  > button {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  > input {
+    max-width: 350px;
+    min-width: 300px;
+    min-height: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: blueviolet;
+    padding-left: 15px;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+  }
+}

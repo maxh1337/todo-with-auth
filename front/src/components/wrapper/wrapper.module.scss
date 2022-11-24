@@ -1,0 +1,15 @@
+.wrapper {
+  margin: 0 auto;
+  max-width: 500px;
+  min-width: 200px;
+  height: 700px;
+  text-align: center;
+  align-items: center;
+
+  > p {
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    color: #000;
+  }
+}

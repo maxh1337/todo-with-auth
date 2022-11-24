@@ -1,0 +1,68 @@
+.login {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+
+  > h1 {
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    color: blueviolet;
+  }
+
+  > input {
+    margin-bottom: 20px;
+    min-width: 250px;
+    min-height: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: blueviolet;
+    padding-left: 15px;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+  }
+
+  > input:last-of-type {
+    margin-bottom: 10px;
+  }
+
+  > button {
+    width: 120px;
+    height: 45px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: blueviolet;
+    background: blueviolet;
+    cursor: pointer;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    color: #ffffff;
+  }
+
+  > div {
+    margin-bottom: 10px;
+
+    > a {
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+    }
+
+    > p {
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      margin: 0 0 7px 0;
+    }
+  }
+
+}
+
+.buttonReg {
+  width: 165px !important;
+}
