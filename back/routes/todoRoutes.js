@@ -15,8 +15,7 @@ router
 	.get(protect, getAllTodosByUserId)
 	.post(protect, createTodo)
 	.put(protect, updateTodo)
-	.delete(deleteTodo)
 
-router.route('/:id').get(protect, getTodo)
+router.route('/:id').get(protect, getTodo).delete(protect, deleteTodo)
 
 export default router

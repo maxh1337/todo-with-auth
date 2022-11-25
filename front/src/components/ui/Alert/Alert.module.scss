@@ -1,0 +1,35 @@
+.alert {
+  width: 50%;
+  background-color: blueviolet;
+  color: #f1e8e8;
+  animation: opacity 0.4s;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  margin: 0 auto 3rem 6rem;
+
+  &.error {
+    background-color: #ff2e63;
+    color: #f1e8e8;
+  }
+
+  &.info {
+    background-color: #50c1e9;
+  }
+
+  &.warning {
+    background-color: #f75940;
+    color: #f1e8e8;
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

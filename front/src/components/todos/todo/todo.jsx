@@ -2,11 +2,11 @@ import { useState } from 'react'
 import styles from './todo.module.scss'
 import trash from '../../../images/trash.svg'
 
-const Todo = ({ text, checked, todoId, onClick }) => {
+const Todo = ({ text, checked, onClick }) => {
 	const [checkd, setCheckd] = useState(false)
 
 	const onChange = () => {
-		console.log("smthing has been changed")
+		console.log('smthing has been changed')
 	}
 
 	return (
@@ -16,7 +16,7 @@ const Todo = ({ text, checked, todoId, onClick }) => {
 				<label></label>
 			</div>
 			<p>{text}</p>
-			<button onClick={onClick} value={todoId}>
+			<button onClick={onClick}>
 				<img src={trash} alt="trash button" />
 			</button>
 		</div>

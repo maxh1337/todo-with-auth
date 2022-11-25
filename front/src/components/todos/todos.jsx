@@ -9,19 +9,18 @@ import { $api } from '../api/api'
 import Loader from '../ui/Loader'
 import { useAuth } from '../../hooks/useAuth'
 import { useMutation } from 'react-query'
+import Alert from '../ui/Alert/Alert'
 
 const Todos = () => {
 	const [name, setName] = useState('')
-	const [todoId, setTodoId] = useState('')
 	const { isAuth } = useAuth()
+	const [todos, setTodos] = useState([])
 
-	useEffect(() => {}, [])
-
-	const { data, isSuccess, isLoading } = useQuery(
-		'get all todos',
+	const { isSuccess, isLoading, data, refetch, error } = useQuery(
+		[`get all todos`],
 		() =>
 			$api({
-				url: `/todos/`,
+				url: `/todos`,
 			}),
 		{
 			refetchOnWindowFocus: false,
@@ -31,7 +30,7 @@ const Todos = () => {
 	const {
 		mutate: createTodo,
 		isSuccess: isSuccessMutate,
-		error,
+		error: CreateError,
 	} = useMutation(
 		'Create new todo',
 		() =>
@@ -43,29 +42,28 @@ const Todos = () => {
 		{
 			onSuccess(data) {
 				console.log(`todo создано ${name}`)
+				refetch()
 			},
 		}
 	)
 
 	const { mutate: deleteTodo, mutateError } = useMutation(
 		'Delete existing todo',
-		() =>
+		(item) =>
 			$api({
-				url: '/todos',
+				url: `/todos/${item}`,
 				type: 'DELETE',
-				body: { todoId },
 			}),
 		{
 			onSuccess(data) {
 				console.log('Успешно удалено')
+				refetch()
 			},
 		}
 	)
 
 	const handleDeleteClick = (item) => {
-		setTodoId(item)
 		deleteTodo(item)
-		console.log(item)
 	}
 
 	return (
@@ -74,23 +72,29 @@ const Todos = () => {
 			<CreateTodo
 				value={name}
 				onChange={(e) => setName(e.currentTarget.value)}
-				onClick={() => createTodo()}
+				onClick={() => {
+					createTodo()
+					setName('')
+				}}
 			/>
+			{error && <Alert type="error" text={error} />}
+			{CreateError && <Alert type="error" text={CreateError} />}
+			{isSuccessMutate && <Alert text="Успешно создано" />}
 			{isLoading && <Loader />}
 			{isSuccess ? (
 				<div className={styles.todos}>
 					<p>Tasks</p>
-					{data.map((item, idx) => {
-						return (
-							<Todo
-								text={item.name}
-								checked={item.checked}
-								key={idx}
-								todoId={item.id}
-								onClick={() => handleDeleteClick(item._id)}
-							/>
-						)
-					})}
+					{isAuth &&
+						data.map((item, idx) => {
+							return (
+								<Todo
+									text={item.name}
+									checked={item.checked}
+									key={idx}
+									onClick={() => handleDeleteClick(item._id)}
+								/>
+							)
+						})}
 				</div>
 			) : isAuth === false && isLoading === false ? (
 				<p>Авторизуйтесь</p>
