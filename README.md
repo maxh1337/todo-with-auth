@@ -14,8 +14,10 @@ it will install all dependencies and project will work
 
 Also you must create `.env` file there u must write
 
-`NODE_ENV = development (or smth else)`  
-`PORT = 5454` PORT for backend   
+`NODE_ENV = development (or smth else)`
+
+`PORT = 5454` PORT for backend
+
 `MONGO_URI = your adress to mongoDB`
 
 `ACCESS_TOKEN = youcanwritehereanythingyouwant` 
