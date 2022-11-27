@@ -24,8 +24,6 @@ const Login = () => {
 
 	const {
 		mutate: auth,
-		isLoading: isLoadingAuth,
-		error: errorAuth,
 	} = useMutation(
 		'Auth',
 		() =>

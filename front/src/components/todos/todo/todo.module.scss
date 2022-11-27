@@ -10,7 +10,10 @@
   vertical-align: middle;
 
 
-  > p {
+  > input {
+    outline: none;
+    border: none;
+    padding-bottom: 10px;
     margin: 0;
     margin-left: 20px;
     font-family: Inter;

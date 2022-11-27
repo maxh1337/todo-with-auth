@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Todo from './todo/todo'
 import Wrapper from '../wrapper/wrapper'
 import Header from '../header/header'
@@ -10,11 +10,11 @@ import Loader from '../ui/Loader'
 import { useAuth } from '../../hooks/useAuth'
 import { useMutation } from 'react-query'
 import Alert from '../ui/Alert/Alert'
+import debounce from 'lodash.debounce'
 
 const Todos = () => {
 	const [name, setName] = useState('')
 	const { isAuth } = useAuth()
-	const [todos, setTodos] = useState([])
 
 	const { isSuccess, isLoading, data, refetch, error } = useQuery(
 		[`get all todos`],
@@ -49,7 +49,7 @@ const Todos = () => {
 
 	const { mutate: deleteTodo, mutateError } = useMutation(
 		'Delete existing todo',
-		(item) =>
+		item =>
 			$api({
 				url: `/todos/${item}`,
 				type: 'DELETE',
@@ -62,7 +62,26 @@ const Todos = () => {
 		}
 	)
 
-	const handleDeleteClick = (item) => {
+	const {
+		mutate: changeChecked,
+		error: errorChange,
+		isSuccess: isSuccessChange,
+	} = useMutation(
+		'Change todo checked',
+		item =>
+			$api({
+				url: '/todos',
+				type: 'PUT',
+				body: { item },
+			}),
+		{
+			onSuccess() {
+				refetch()
+			},
+		}
+	)
+
+	const handleDeleteClick = item => {
 		deleteTodo(item)
 	}
 
@@ -71,15 +90,19 @@ const Todos = () => {
 			<Header />
 			<CreateTodo
 				value={name}
-				onChange={(e) => setName(e.currentTarget.value)}
+				onChange={e => setName(e.currentTarget.value)}
 				onClick={() => {
 					createTodo()
 					setName('')
 				}}
 			/>
-			{error && <Alert type="error" text={error} />}
-			{CreateError && <Alert type="error" text={CreateError} />}
-			{isSuccessMutate && <Alert text="Успешно создано" />}
+			{(CreateError || errorChange || error || mutateError) && (
+				<Alert
+					type="error"
+					text={CreateError || errorChange || error || mutateError}
+				/>
+			)}
+			{(isSuccessMutate || isSuccessChange) && <Alert text="Успешно" />}
 			{isLoading && <Loader />}
 			{isSuccess ? (
 				<div className={styles.todos}>
@@ -89,10 +112,26 @@ const Todos = () => {
 							return (
 								<Todo
 									text={item.name}
-									checked={item.checked}
 									key={idx}
+									checked={item.checked}
 									onClick={() => handleDeleteClick(item._id)}
-								/>
+									onChange={debounce(
+										e =>
+											e.target.value &&
+											changeChecked({
+												name: e.target.value,
+												todoId: item._id,
+												checked: item.checked,
+											}),
+										1000
+									)}
+									onClickChange={e => {
+										changeChecked({
+											checked: !item.checked,
+											todoId: item._id,
+										})
+									}}
+								></Todo>
 							)
 						})}
 				</div>

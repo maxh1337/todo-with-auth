@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
 import create from '../../../images/plus-svgrepo-com.svg'
 import styles from './create-todo.module.scss'
-import { useMutation } from 'react-query'
-import { $api } from '../../api/api'
 
 const CreateTodo = ({ value, onChange, onClick }) => {
-	const [name, setName] = useState('')
 	return (
 		<div className={styles.createTodo}>
 			<input

@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import Header from './components/header/header'
 import Todos from './components/todos/todos'
 import Login from './components/auth/login'
 import Register from './components/auth/register'

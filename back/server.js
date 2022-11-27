@@ -3,19 +3,26 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import colors from 'colors'
+
 /* Routes */
 import userRoutes from './routes/userRoutes.js'
+import todoRoutes from './routes/todoRoutes.js'
 
 /* Config */
 
 import { connectDB } from './config/db.js'
-import { errorHandler, notFound } from './middleware/errorMiddleware.js'
-import todoRoutes from './routes/todoRoutes.js'
 
+/* Middleware */
+
+import { errorHandler, notFound } from './middleware/errorMiddleware.js'
+
+// Подгрузка настроек проекта в process.env
 dotenv.config()
 
+// Подключение базы данных
 connectDB()
 
+// Включаем express приложение
 const app = express()
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
@@ -26,6 +33,9 @@ app.use(
 		origin: 'http://localhost:3000',
 	})
 )
+
+/* Подключение route файлов */
+
 app.use('/api/users', userRoutes)
 app.use('/api/todos', todoRoutes)
 

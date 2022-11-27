@@ -28,8 +28,6 @@ const Register = () => {
 
 	const {
 		mutate: register,
-		isLoading,
-		errorAuth,
 	} = useMutation(
 		'Registration',
 		() =>

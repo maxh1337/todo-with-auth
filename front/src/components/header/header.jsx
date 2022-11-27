@@ -1,5 +1,4 @@
 import React from 'react'
-import Wrapper from '../wrapper/wrapper'
 import styles from './header.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'

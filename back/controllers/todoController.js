@@ -10,6 +10,11 @@ export const createTodo = asyncHandler(async (req, res) => {
 	const { name } = req.body
 	console.log(name)
 
+	if(!name) {
+		res.status(500)
+		throw new Error('Вы не указали название')
+	}
+
 	const todo = await Todo.create({
 		user,
 		name,
@@ -28,7 +33,7 @@ export const getTodo = asyncHandler(async (req, res) => {
 	res.json(todo)
 })
 
-//@description GEt all todos
+//@description GEt all todos by id
 //@route GET /api/todos
 //@access Private
 
@@ -39,29 +44,45 @@ export const getAllTodosByUserId = asyncHandler(async (req, res) => {
 	res.json(todos)
 })
 
+//@description GEt all todos
+//@route GET /api/todos/all
+//@access Private
+
+export const getAllTodos = asyncHandler(async (req, res) => {
+	const todos = await Todo.find({}).lean()
+
+	res.json(todos)
+})
+
 //@description Update todo
 //@route PUT /api/todos
 //@access Private
 
 export const updateTodo = asyncHandler(async (req, res) => {
-	const { name, checked, todoId } = req.body
+	const { item } = req.body
 
-	const todo = await Todo.findById(todoId)
+
+	
+	const todo = await Todo.findById(item.todoId)
 
 	if (!todo) {
 		res.status(404)
 		throw new Error('Данный todo не найден')
 	}
 
-	todo.name = name
-	todo.checked = checked
+	if(item.name) {
+		todo.name = item.name
+	}
 
+
+
+	todo.checked = item.checked
 	const updatedTodo = await todo.save()
 
 	res.json(updatedTodo)
 })
 
-//@description GEt all todos
+//@description DELETE todo by ID
 //@route DELETE /api/todos/:id
 //@access Private
 
@@ -69,7 +90,6 @@ export const deleteTodo = asyncHandler(async (req, res) => {
 	const todoId = req.params.id
 
 	const todo = await Todo.findById(todoId)
-
 
 	if (!todo) {
 		res.status(404)
