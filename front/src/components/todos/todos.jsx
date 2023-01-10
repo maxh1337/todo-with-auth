@@ -24,7 +24,7 @@ const Todos = () => {
 			}),
 		{
 			refetchOnWindowFocus: false,
-		}
+		},
 	)
 
 	const {
@@ -44,7 +44,7 @@ const Todos = () => {
 				console.log(`todo создано ${name}`)
 				refetch()
 			},
-		}
+		},
 	)
 
 	const { mutate: deleteTodo, mutateError } = useMutation(
@@ -59,7 +59,7 @@ const Todos = () => {
 				console.log('Успешно удалено')
 				refetch()
 			},
-		}
+		},
 	)
 
 	const {
@@ -72,13 +72,13 @@ const Todos = () => {
 			$api({
 				url: '/todos',
 				type: 'PUT',
-				body: { item },
+				body: item,
 			}),
 		{
 			onSuccess() {
 				refetch()
 			},
-		}
+		},
 	)
 
 	const handleDeleteClick = item => {
@@ -98,11 +98,11 @@ const Todos = () => {
 			/>
 			{(CreateError || errorChange || error || mutateError) && (
 				<Alert
-					type="error"
+					type='error'
 					text={CreateError || errorChange || error || mutateError}
 				/>
 			)}
-			{(isSuccessMutate || isSuccessChange) && <Alert text="Успешно" />}
+			{(isSuccessMutate || isSuccessChange) && <Alert text='Успешно' />}
 			{isLoading && <Loader />}
 			{isSuccess ? (
 				<div className={styles.todos}>
@@ -123,7 +123,7 @@ const Todos = () => {
 												todoId: item._id,
 												checked: item.checked,
 											}),
-										1000
+										1000,
 									)}
 									onClickChange={e => {
 										changeChecked({

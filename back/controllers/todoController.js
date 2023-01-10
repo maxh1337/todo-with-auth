@@ -10,7 +10,7 @@ export const createTodo = asyncHandler(async (req, res) => {
 	const { name } = req.body
 	console.log(name)
 
-	if(!name) {
+	if (!name) {
 		res.status(500)
 		throw new Error('Вы не указали название')
 	}
@@ -59,21 +59,20 @@ export const getAllTodos = asyncHandler(async (req, res) => {
 //@access Private
 
 export const updateTodo = asyncHandler(async (req, res) => {
-	const { item } = req.body
 
+	const item = req.body
 
-	
 	const todo = await Todo.findById(item.todoId)
+
 
 	if (!todo) {
 		res.status(404)
 		throw new Error('Данный todo не найден')
 	}
 
-	if(item.name) {
+	if (item.name) {
 		todo.name = item.name
 	}
-
 
 
 	todo.checked = item.checked

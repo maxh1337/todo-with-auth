@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { AuthContext } from './contexts/AuthContext'
 import AppProvider from './providers/AppProvider'
 
 const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 
 root.render(
 	<React.StrictMode>
@@ -17,5 +16,5 @@ root.render(
 				<AppProvider />
 			</QueryClientProvider>
 		</BrowserRouter>
-	</React.StrictMode>
+	</React.StrictMode>,
 )

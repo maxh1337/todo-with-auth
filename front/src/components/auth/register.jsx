@@ -10,13 +10,12 @@ const Register = () => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const setIsAuth = useAuth()
+	const { setIsAuth } = useAuth()
 
 	const navigate = useNavigate()
 
 	const successLogin = (token) => {
 		localStorage.setItem('token', token)
-		setIsAuth(true)
 
 		setIsAuth(true)
 		setName('')
@@ -41,7 +40,7 @@ const Register = () => {
 			onSuccess(data) {
 				successLogin(data.token)
 			},
-		}
+		},
 	)
 
 	const handleSumbit = (e) => {
@@ -55,24 +54,24 @@ const Register = () => {
 				<input
 					value={name}
 					onChange={(e) => setName(e.currentTarget.value)}
-					placeholder="Имя"
+					placeholder='Имя'
 				/>
 				<input
-					placeholder="Email"
+					placeholder='Email'
 					value={email}
 					onChange={(e) => setEmail(e.currentTarget.value)}
 				/>
 				<input
-					placeholder="Password"
+					placeholder='Password'
 					value={password}
 					onChange={(e) => setPassword(e.currentTarget.value)}
 				/>
 				<div>
 					<p>Уже есть аккаунт?</p>
-					<Link to="/login">Войти</Link>
+					<Link to='/login'>Войти</Link>
 				</div>
 
-				<button type="submit" className={styles.buttonReg}>
+				<button type='submit' className={styles.buttonReg}>
 					Зарегистрироваться
 				</button>
 			</form>

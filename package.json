@@ -8,10 +8,9 @@
 		"start": "node back/server",
 		"server": "nodemon back/server",
 		"client": "yarn run start --prefix front",
-		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"pretty": "prettier --write \"./**/*.{js,jsx,json}\""
 	},
-	"author": "Maks Vorobey",
+	"author": "",
 	"license": "MIT",
 	"devDependencies": {
 		"colors": "^1.4.0",
