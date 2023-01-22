@@ -111,6 +111,7 @@ const Todos = () => {
 						data.map((item, idx) => {
 							return (
 								<Todo
+									createdAt={item.createdAt}
 									text={item.name}
 									key={idx}
 									checked={item.checked}
