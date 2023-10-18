@@ -8,7 +8,7 @@ To install all components then you git clone it or download manually
 
 run following command at your Terminal at main folder and then at /front folder
 
-### `yarn intall`
+### `yarn install`
 
 it will install all dependencies and project will work
 
