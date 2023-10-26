@@ -5,16 +5,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { $api } from '../api/api'
 import { useAuth } from '../../hooks/useAuth'
+import { useUserId } from '../../hooks/useUserId'
 
 const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { setIsAuth } = useAuth()
+	const {setIsAuth } = useAuth()
 
 	const navigate = useNavigate()
 
-	const successLogin = (token) => {
+	const successLogin = (token, userIdd) => {
 		localStorage.setItem('token', token)
+		localStorage.setItem('userId', userIdd)
 		setIsAuth(true)
 		setPassword('')
 		setEmail('')
@@ -35,7 +37,7 @@ const Login = () => {
 			}),
 		{
 			onSuccess(data) {
-				successLogin(data.token)
+				successLogin(data.token, data.user._id)
 			},
 		}
 	)

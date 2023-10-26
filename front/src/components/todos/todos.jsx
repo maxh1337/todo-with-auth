@@ -20,7 +20,7 @@ const Todos = () => {
 		[`get all todos`],
 		() =>
 			$api({
-				url: `/todos`,
+				url: `/todos/all`,
 			}),
 		{
 			refetchOnWindowFocus: false,
@@ -111,6 +111,7 @@ const Todos = () => {
 						data.map((item, idx) => {
 							return (
 								<Todo
+									user={item.user}
 									createdAt={item.createdAt}
 									text={item.name}
 									key={idx}
